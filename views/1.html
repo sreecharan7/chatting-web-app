@@ -1,0 +1,54 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download File Example</title>
+</head>
+<body>
+
+<a id="downloadLink" href="#" onclick="downloadFile()">Download File</a>
+
+<script>
+function downloadFile() {
+    // The URL of the file you want to download
+    var fileUrl = 'https://cdn.pixabay.com/photo/2016/12/18/13/45/download-1915753_1280.png';
+
+    // Create a link element
+    var downloadLink = document.getElementById('downloadLink');
+
+    // Create a new XMLHttpRequest
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', fileUrl, true);
+    xhr.responseType = 'blob';
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            // Create a blob from the response
+            var blob = new Blob([xhr.response], { type: 'application/octet-stream' });
+
+            // Create a temporary URL for the blob
+            var blobUrl = window.URL.createObjectURL(blob);
+
+            // Set the download attribute of the link to the file name
+            downloadLink.download = 'd';
+
+            // Set the href attribute of the link to the blob URL
+            downloadLink.href = blobUrl;
+
+            // Trigger a click on the link to start the download
+            downloadLink.click();
+
+            // Clean up by revoking the blob URL
+            window.URL.revokeObjectURL(blobUrl);
+        }
+    };
+
+    xhr.send();
+}
+</script>
+
+</body>
+</html>

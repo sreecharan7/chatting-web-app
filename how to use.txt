@@ -1,0 +1,6 @@
+first run these codes
+1)npm i
+2)node index.js
+
+
+and then open the html file in the views folder
